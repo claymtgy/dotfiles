@@ -8,5 +8,6 @@ if [[ $choice == 1 ]]; then
 fi
 
 if [[ $choice == 2 ]]; then
-	sudo pacman -Syu ripgrep kitty nvm npm docker 
+	sudo pacman -Syu ripgrep kitty nvm npm docker zsh 
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
