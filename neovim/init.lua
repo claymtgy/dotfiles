@@ -9,6 +9,9 @@ vim.g.have_nerd_font = false
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
+--
+local opts = { noremap = true, silent = true }
+local keymap = vim.api.nvim_set_keymap
 
 -- Make line numbers default
 vim.opt.number = true
@@ -198,24 +201,6 @@ require("lazy").setup({
 	-- you do for a plugin at the top level, you can do for a dependency.
 	--
 	-- Use the `dependencies` key to specify the dependencies of a particular plugin
-	{
-		"adalessa/laravel.nvim",
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-			"tpope/vim-dotenv",
-			"MunifTanjim/nui.nvim",
-			"nvimtools/none-ls.nvim",
-		},
-		cmd = { "Sail", "Artisan", "Composer", "Npm", "Yarn", "Laravel" },
-		keys = {
-			{ "<leader>la", ":Laravel artisan<cr>" },
-			{ "<leader>lr", ":Laravel routes<cr>" },
-			{ "<leader>lm", ":Laravel related<cr>" },
-		},
-		event = { "VeryLazy" },
-		config = true,
-	},
-
 	{
 		"rcarriga/nvim-notify",
 		config = function()
@@ -493,7 +478,6 @@ require("lazy").setup({
 				-- But for many setups, the LSP (`tsserver`) will work just fine
 				-- tsserver = {},
 				-- intelephense = {},
-				volar = {},
 
 				--
 				-- biome = {},
