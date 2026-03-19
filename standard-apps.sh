@@ -4,10 +4,13 @@ echo "2: Arch (pacman)"
 read choice
 
 if [[ $choice == 1 ]]; then
-	sudo apt update && sudo apt upgrade -y && sudo apt install ripgrep 
 	sudo add-apt-repository ppa:avengemedia/danklinux
 	sudo add-apt-repository ppa:avengemedia/dms
+	sudo add-apt-repository ppa:neovim-ppa/unstable
+	sudo apt update && sudo apt upgrade -y && sudo apt install ripgrep 
 	sudo apt install niri dms build-essential git python3-pip
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	source "$HOME/.cargo/env"
 	sudo apt install wayland-protocols \
 	libwayland-dev \
 	libegl1-mesa-dev \
@@ -25,7 +28,7 @@ if [[ $choice == 1 ]]; then
 	libavcodec-dev \
 	libavformat-dev \
 	ninja-build \
-	meson
+	meson -y
 	sudo apt install libxcb-composite0-dev \
         libxcb-icccm4-dev \
         libxcb-image0-dev \
@@ -33,11 +36,10 @@ if [[ $choice == 1 ]]; then
         libxcb-xfixes0-dev \
         libxkbcommon-dev \
         libxcb-xinput-dev \
-        libx11-xcb-dev
-	sudo apt install dmenu
-	sudo apt install swaybg
-	sudo apt install swayidle
-	sudo apt install swaylock
+        libx11-xcb-dev -y
+	sudo apt install dmenu swaybgswayidle swaylock tmux neovim luarocks golang-go zsh -y
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	npm install -g tree-sitter-cli
 fi
 
 if [[ $choice == 2 ]]; then
