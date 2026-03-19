@@ -113,3 +113,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 alias data="cd ~/repos/aspire-data-portal/ && source ./backend/venv/bin/activate"
+
+
+export ENABLE_VKBASALT=1
+export PATH="$HOME/.local/bin:$PATH"
+
+alias dfe="data  && cd frontend && npm run start:frontend"
+alias dbe="data  && cd backend && fastapi dev server/main.py"
+
+alias gd="cd ~/repos/work/grant-status-dashboard/"
+alias gdb="cd ~/repos/work/grant-status-dashboard/backend/"
+alias gdf="cd ~/repos/work/grant-status-dashboard/frontend/"
+
+export PATH="$PATH:$HOME/go/bin"
