@@ -1,0 +1,406 @@
+/* ── Fonts ───────────────────────────────────────────────────────────────── */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 12px;
+    min-height: 0;
+}
+
+/* Force font on GTK label/button widgets, overriding theme specificity */
+label, button {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 12px;
+}
+
+/* ── Bar window ──────────────────────────────────────────────────────────── */
+window#waybar {
+    background-color: rgba(8, 10, 16, 0.78);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    color: rgba(200, 210, 225, 0.90);
+    transition-property: background-color;
+    transition-duration: 0.4s;
+}
+
+window#waybar.hidden {
+    opacity: 0.15;
+}
+
+window#waybar.termite,
+window#waybar.chromium {
+    background-color: rgba(8, 10, 16, 0.92);
+    border: none;
+}
+
+/* ── Shared module base ──────────────────────────────────────────────────── *
+ * Every module is a translucent glass tile with a subtle inset border.      *
+ * Individual sections override only what differs.                           */
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#custom-audio-selector,
+#custom-power,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#mpd,
+#language,
+#keyboard-state {
+    padding: 0 11px;
+    margin: 3px 1px;
+    color: rgba(200, 210, 225, 0.88);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 4px;
+}
+
+/* ── Buttons & workspaces ────────────────────────────────────────────────── */
+button {
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 -2px rgba(255, 255, 255, 0.25);
+}
+
+#workspaces {
+    margin: 0 2px;
+}
+
+#workspaces button {
+    padding: 0 7px;
+    margin: 3px 1px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+    color: rgba(160, 170, 190, 0.75);
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    background-color: rgba(255, 255, 255, 0.09);
+    color: rgba(210, 220, 235, 0.95);
+    box-shadow: none;
+}
+
+#workspaces button.focused {
+    background-color: rgba(100, 130, 180, 0.22);
+    border-color: rgba(120, 160, 210, 0.35);
+    color: rgba(180, 205, 240, 0.95);
+    box-shadow: inset 0 -2px rgba(120, 160, 210, 0.50);
+}
+
+#workspaces button.urgent {
+    background-color: rgba(180, 60, 60, 0.30);
+    border-color: rgba(210, 80, 80, 0.40);
+    color: rgba(240, 160, 160, 0.95);
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+.modules-left > widget:first-child > #workspaces { margin-left: 0; }
+.modules-right > widget:last-child > #workspaces  { margin-right: 0; }
+
+/* ── Mode indicator ──────────────────────────────────────────────────────── */
+#mode {
+    background-color: rgba(100, 115, 130, 0.30);
+    border-color: rgba(150, 165, 185, 0.30);
+    box-shadow: inset 0 -2px rgba(180, 195, 215, 0.40);
+}
+
+/* ── Clock ───────────────────────────────────────────────────────────────── */
+#clock {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: rgba(210, 218, 230, 0.92);
+    font-weight: 500;
+}
+
+/* ── Battery ─────────────────────────────────────────────────────────────── */
+#battery {
+    background-color: rgba(70, 155, 100, 0.18);
+    border-color: rgba(90, 175, 120, 0.25);
+    color: rgba(160, 215, 175, 0.90);
+}
+
+#battery.charging,
+#battery.plugged {
+    background-color: rgba(60, 170, 100, 0.22);
+    border-color: rgba(80, 190, 120, 0.30);
+    color: rgba(150, 230, 170, 0.92);
+}
+
+@keyframes blink-critical {
+    50% {
+        background-color: rgba(180, 50, 50, 0.40);
+        color: rgba(240, 150, 150, 0.95);
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: rgba(160, 45, 45, 0.30);
+    border-color: rgba(200, 70, 70, 0.35);
+    color: rgba(230, 130, 130, 0.95);
+    animation-name: blink-critical;
+    animation-duration: 1.2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* ── CPU ─────────────────────────────────────────────────────────────────── */
+#cpu {
+    background-color: rgba(70, 170, 110, 0.15);
+    border-color: rgba(90, 190, 130, 0.22);
+    color: rgba(150, 215, 170, 0.88);
+}
+
+/* ── Memory ──────────────────────────────────────────────────────────────── */
+#memory {
+    background-color: rgba(120, 85, 170, 0.18);
+    border-color: rgba(150, 110, 200, 0.25);
+    color: rgba(190, 165, 230, 0.88);
+}
+
+/* ── Disk ────────────────────────────────────────────────────────────────── */
+#disk {
+    background-color: rgba(140, 90, 40, 0.18);
+    border-color: rgba(170, 120, 60, 0.25);
+    color: rgba(210, 175, 130, 0.88);
+}
+
+/* ── Backlight ───────────────────────────────────────────────────────────── */
+#backlight {
+    background-color: rgba(180, 160, 80, 0.14);
+    border-color: rgba(205, 185, 100, 0.22);
+    color: rgba(230, 215, 155, 0.88);
+}
+
+/* ── Network ─────────────────────────────────────────────────────────────── */
+#network {
+    background-color: rgba(60, 115, 175, 0.18);
+    border-color: rgba(80, 140, 205, 0.25);
+    color: rgba(145, 185, 230, 0.88);
+}
+
+#network.disconnected {
+    background-color: rgba(160, 45, 45, 0.22);
+    border-color: rgba(195, 70, 70, 0.30);
+    color: rgba(225, 130, 130, 0.90);
+}
+
+/* ── Audio ───────────────────────────────────────────────────────────────── */
+#pulseaudio {
+    background-color: rgba(175, 135, 45, 0.18);
+    border-color: rgba(205, 165, 65, 0.25);
+    color: rgba(230, 200, 130, 0.88);
+}
+
+#pulseaudio:hover {
+    background-color: rgba(175, 135, 45, 0.28);
+}
+
+#pulseaudio.muted {
+    background-color: rgba(80, 85, 95, 0.18);
+    border-color: rgba(110, 115, 130, 0.22);
+    color: rgba(145, 150, 165, 0.70);
+}
+
+#wireplumber {
+    background-color: rgba(175, 135, 45, 0.18);
+    border-color: rgba(205, 165, 65, 0.25);
+    color: rgba(230, 200, 130, 0.88);
+}
+
+#wireplumber.muted {
+    background-color: rgba(80, 85, 95, 0.18);
+    border-color: rgba(110, 115, 130, 0.22);
+    color: rgba(145, 150, 165, 0.70);
+}
+
+/* ── Audio device selector ───────────────────────────────────────────────── */
+#custom-audio-selector {
+    background-color: rgba(55, 100, 160, 0.18);
+    border-color: rgba(80, 130, 195, 0.28);
+    color: rgba(140, 185, 235, 0.88);
+}
+
+#custom-audio-selector:hover {
+    background-color: rgba(55, 100, 160, 0.28);
+}
+
+/* ── Temperature ─────────────────────────────────────────────────────────── */
+#temperature {
+    background-color: rgba(185, 110, 45, 0.18);
+    border-color: rgba(215, 135, 65, 0.25);
+    color: rgba(235, 185, 130, 0.88);
+}
+
+#temperature.critical {
+    background-color: rgba(165, 50, 50, 0.28);
+    border-color: rgba(200, 75, 75, 0.35);
+    color: rgba(235, 140, 140, 0.92);
+}
+
+/* ── Power profiles ──────────────────────────────────────────────────────── */
+#power-profiles-daemon {
+    padding-right: 13px;
+}
+
+#power-profiles-daemon.performance {
+    background-color: rgba(165, 50, 50, 0.22);
+    border-color: rgba(200, 75, 75, 0.30);
+    color: rgba(230, 140, 140, 0.90);
+}
+
+#power-profiles-daemon.balanced {
+    background-color: rgba(60, 115, 175, 0.18);
+    border-color: rgba(80, 140, 205, 0.25);
+    color: rgba(145, 185, 230, 0.88);
+}
+
+#power-profiles-daemon.power-saver {
+    background-color: rgba(60, 155, 95, 0.18);
+    border-color: rgba(80, 180, 115, 0.25);
+    color: rgba(140, 215, 165, 0.88);
+}
+
+/* ── Tray ────────────────────────────────────────────────────────────────── */
+#tray {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.07);
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: rgba(165, 50, 50, 0.30);
+}
+
+/* ── Idle inhibitor ──────────────────────────────────────────────────────── */
+#idle_inhibitor {
+    background-color: rgba(255, 255, 255, 0.04);
+    color: rgba(160, 170, 190, 0.70);
+}
+
+#idle_inhibitor.activated {
+    background-color: rgba(200, 215, 235, 0.14);
+    border-color: rgba(200, 215, 235, 0.25);
+    color: rgba(210, 225, 245, 0.92);
+}
+
+/* ── MPD ─────────────────────────────────────────────────────────────────── */
+#mpd {
+    background-color: rgba(65, 155, 100, 0.15);
+    border-color: rgba(85, 180, 120, 0.22);
+    color: rgba(145, 210, 165, 0.88);
+}
+
+#mpd.disconnected {
+    background-color: rgba(155, 50, 50, 0.20);
+    border-color: rgba(190, 70, 70, 0.28);
+    color: rgba(220, 130, 130, 0.85);
+}
+
+#mpd.stopped {
+    background-color: rgba(80, 85, 95, 0.16);
+    color: rgba(140, 148, 165, 0.65);
+}
+
+#mpd.paused {
+    background-color: rgba(65, 125, 85, 0.16);
+    color: rgba(135, 185, 150, 0.75);
+}
+
+/* ── Media ───────────────────────────────────────────────────────────────── */
+#custom-media {
+    background-color: rgba(65, 155, 100, 0.15);
+    border-color: rgba(85, 180, 120, 0.22);
+    color: rgba(145, 210, 165, 0.88);
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+    background-color: rgba(40, 165, 90, 0.18);
+    border-color: rgba(60, 190, 110, 0.25);
+}
+
+#custom-media.custom-vlc {
+    background-color: rgba(190, 110, 30, 0.18);
+    border-color: rgba(220, 135, 50, 0.25);
+    color: rgba(235, 185, 120, 0.88);
+}
+
+/* ── Language / keyboard ─────────────────────────────────────────────────── */
+#language {
+    min-width: 16px;
+}
+
+#keyboard-state {
+    min-width: 16px;
+    padding: 0;
+    margin: 3px 3px;
+}
+
+#keyboard-state > label {
+    padding: 0 7px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.20);
+    color: rgba(200, 210, 225, 0.60);
+}
+
+/* ── Scratchpad ──────────────────────────────────────────────────────────── */
+#scratchpad {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+#scratchpad.empty {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/* ── Privacy ─────────────────────────────────────────────────────────────── */
+#privacy {
+    padding: 0;
+}
+
+#privacy-item {
+    padding: 0 7px;
+    color: rgba(200, 210, 225, 0.88);
+}
+
+#privacy-item.screenshare {
+    background-color: rgba(175, 75, 20, 0.28);
+}
+
+#privacy-item.audio-in {
+    background-color: rgba(40, 145, 20, 0.25);
+}
+
+#privacy-item.audio-out {
+    background-color: rgba(20, 90, 185, 0.25);
+}
+
+/* ── Misc ────────────────────────────────────────────────────────────────── */
+label:focus {
+    background-color: rgba(0, 0, 0, 0.30);
+}
