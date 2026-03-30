@@ -126,3 +126,5 @@ alias gdb="cd ~/repos/work/grant-status-dashboard/backend/"
 alias gdf="cd ~/repos/work/grant-status-dashboard/frontend/"
 
 export PATH="$PATH:$HOME/go/bin"
+alias bh="sudo brightnessctl s 100%"
+alias bl="sudo brightnessctl s 1"

@@ -37,6 +37,7 @@ if [[ $choice == 1 ]]; then
         libxkbcommon-dev \
         libxcb-xinput-dev \
         libx11-xcb-dev -y
+	sudo apt install wl-clipboard xclip -y
 	sudo apt install dmenu swaybgswayidle swaylock tmux neovim luarocks golang-go zsh -y
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	npm install -g tree-sitter-cli
