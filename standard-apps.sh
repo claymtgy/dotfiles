@@ -1,9 +1,10 @@
+#!/usr/bin/env bash
 echo "1: Ubuntu/Debian (apt)"
 echo "2: Arch (pacman)"
 
 read choice
 
-if [[ $choice == 1 ]]; then
+if [[ "$choice" == 1 ]]; then
 	sudo add-apt-repository ppa:avengemedia/danklinux
 	sudo add-apt-repository ppa:avengemedia/dms
 	sudo add-apt-repository ppa:neovim-ppa/unstable
@@ -38,12 +39,12 @@ if [[ $choice == 1 ]]; then
         libxcb-xinput-dev \
         libx11-xcb-dev -y
 	sudo apt install wl-clipboard xclip -y
-	sudo apt install dmenu swaybgswayidle swaylock tmux neovim luarocks golang-go zsh -y
+	sudo apt install dmenu swaybg swayidle swaylock tmux neovim luarocks golang-go zsh -y
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	npm install -g tree-sitter-cli
 fi
 
-if [[ $choice == 2 ]]; then
+if [[ "$choice" == 2 ]]; then
 	sudo pacman -Syu ripgrep kitty nvm npm docker zsh 
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi

@@ -10,8 +10,11 @@ echo "2: Copy current niri config to the repo"
 read choice
 
 if [[ $choice == 1 ]]; then
-    mkdir -p "$NIRI_CONFIG_DIR"
+    mkdir -p "$NIRI_CONFIG_DIR/dms"
     cp "$SCRIPT_DIR/config.kdl" "$NIRI_CONFIG_DIR/config.kdl"
+    if [[ -f "$SCRIPT_DIR/dms/outputs.kdl" ]]; then
+        cp "$SCRIPT_DIR/dms/outputs.kdl" "$NIRI_CONFIG_DIR/dms/outputs.kdl"
+    fi
     echo "Copied repo's niri config to $NIRI_CONFIG_DIR/config.kdl"
     echo "Reload niri config with Mod+Shift+C to apply changes."
 fi
