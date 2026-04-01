@@ -3,9 +3,19 @@
 // Check the wiki for a full description of the configuration:
 // https://yalter.github.io/niri/Configuration:-Introduction
 
+environment {
+    NIRI_DISABLE_DIRECT_SCANOUT "1"
+}
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://yalter.github.io/niri/Configuration:-Input
+// Identical externals often share EDID → wrong output identity / duplicated window (#734).
+// Frame queue tweak can help tearing / bogus mirroring on some multi-head setups (#3079).
+debug {
+    disable-monitor-names
+    wait-for-frame-completion-before-queueing
+}
+
 input {
     keyboard {
         xkb {
@@ -267,8 +277,9 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "waybar"
+// DMS shell; spawn from niri so layer-shell sees this compositor.
+// Avoid a second DMS from systemd: systemctl --user mask dms.service
+spawn-at-startup "dms" "run" "--session"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"

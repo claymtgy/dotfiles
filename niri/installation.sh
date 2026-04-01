@@ -16,7 +16,7 @@ if [[ $choice == 1 ]]; then
         cp "$SCRIPT_DIR/dms/outputs.kdl" "$NIRI_CONFIG_DIR/dms/outputs.kdl"
     fi
     echo "Copied repo's niri config to $NIRI_CONFIG_DIR/config.kdl"
-    echo "Reload niri config with Mod+Shift+C to apply changes."
+    echo "Reload niri: niri msg action load-config-file"
 fi
 
 if [[ $choice == 2 ]]; then
@@ -26,5 +26,10 @@ if [[ $choice == 2 ]]; then
     else
         echo "Error: $NIRI_CONFIG_DIR/config.kdl not found"
         exit 1
+    fi
+    if [[ -f "$NIRI_CONFIG_DIR/dms/outputs.kdl" ]]; then
+        mkdir -p "$SCRIPT_DIR/dms"
+        cp "$NIRI_CONFIG_DIR/dms/outputs.kdl" "$SCRIPT_DIR/dms/outputs.kdl"
+        echo "Copied $NIRI_CONFIG_DIR/dms/outputs.kdl to repo"
     fi
 fi
