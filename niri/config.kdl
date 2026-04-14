@@ -22,13 +22,15 @@ input {
             // You can set rules, model, layout, variant and options.
             // For more information, see xkeyboard-config(7).
 
+            // Caps Lock → Escape (see caps:escape in xkeyboard-config(7)).
+            options "caps:escape"
+
             // For example:
             // layout "us,ru"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
 
-            // If this section is empty, niri will fetch xkb settings
-            // from org.freedesktop.locale1. You can control these using
-            // localectl set-x11-keymap.
+            // If layout/variant are unset, niri can still take them from
+            // org.freedesktop.locale1 (localectl set-x11-keymap).
         }
 
         // Enable numlock on startup, omitting this setting disables it.
@@ -294,7 +296,7 @@ hotkey-overlay {
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
 // This option will also fix border/focus ring drawing behind some semitransparent windows.
 // After enabling or disabling this, you need to restart the apps for this to take effect.
-// prefer-no-csd
+prefer-no-csd
 
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.

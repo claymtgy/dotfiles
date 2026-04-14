@@ -56,6 +56,10 @@ output eDP-1    resolution 2880x1800@120Hz scale 2 position 3840,0
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
+input type:keyboard {
+    xkb_options caps:escape
+}
+
 ### Key bindings
 #
 # Basics:

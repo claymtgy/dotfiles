@@ -1,0 +1,13 @@
+[Unit]
+Description=Unblock Bluetooth radio after adapter is up (Lenovo ideapad_laptop / hci0 soft-block quirk)
+After=bluetooth.service
+Wants=bluetooth.service
+
+[Service]
+Type=oneshot
+# rfkill needs root; bluetoothctl talks to bluetoothd over the system bus.
+ExecStart=/bin/bash -c '/usr/sbin/rfkill unblock bluetooth; sleep 2; /usr/bin/bluetoothctl power on'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
